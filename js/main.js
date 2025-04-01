@@ -62,6 +62,32 @@ function openEditModal(index) {
     document.getElementById("editModal").dataset.index = index;  
     document.getElementById("editModal").classList.remove("hidden");
 }
+/** 
+function renderSubscriptions() {
+    const tableBody = document.getElementById("subscriptions");
+    tableBody.innerHTML = "";
+
+    subscriptions.forEach((subscription, index) => {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+            <td>${subscription.name}</td>
+            <td>${subscription.amount}</td>
+             <td><a href="tel:${subscription.phone}">${subscription.phone}</a></td>
+            <td onclick="togglePayment(${index}, 4)">${subscription.paymentStatus[4] ? "✅" : "❌"}</td>
+            <td onclick="togglePayment(${index}, 5)">${subscription.paymentStatus[5] ? "✅" : "❌"}</td>
+            <td onclick="togglePayment(${index}, 6)">${subscription.paymentStatus[6] ? "✅" : "❌"}</td>
+            <td onclick="togglePayment(${index}, 7)">${subscription.paymentStatus[7] ? "✅" : "❌"}</td>
+            <td onclick="togglePayment(${index}, 8)">${subscription.paymentStatus[8] ? "✅" : "❌"}</td>
+            <td onclick="togglePayment(${index}, 9)">${subscription.paymentStatus[9] ? "✅" : "❌"}</td>
+            <td onclick="togglePayment(${index}, 10)">${subscription.paymentStatus[10] ? "✅" : "❌"}</td>
+            <td onclick="togglePayment(${index}, 11)">${subscription.paymentStatus[11] ? "✅" : "❌"}</td>
+            <td onclick="togglePayment(${index}, 12)">${subscription.paymentStatus[12] ? "✅" : "❌"}</td>
+            <td><button onclick="editSubscription(${index})">تعديل</button></td>
+            <td><button onclick="deleteSubscription(${index})">حذف</button></td>
+        `;
+        tableBody.appendChild(row);
+    });
+}*/
 
 function renderSubscriptions() {
     let tbody = document.getElementById("subscriptions");
@@ -87,6 +113,8 @@ function renderSubscriptions() {
         tbody.innerHTML += row;
     });
 }
+
+
 
 function togglePayment(index, month) {
     subscriptions[index].paymentStatus[month] = !subscriptions[index].paymentStatus[month];
@@ -121,7 +149,7 @@ function editSubscription(index) {
     document.getElementById("editModal").classList.remove("hidden");
 }
 
-function saveEdit() {
+/**function saveEdit() {
     const index = document.getElementById("editIndex").value;
     const name = document.getElementById("editName").value;
     const amount = document.getElementById("editAmount").value;
@@ -132,6 +160,32 @@ function saveEdit() {
     renderSubscriptions();
     closeEditModal();
 }
+**/
+
+
+function saveEdit() {
+    let index = document.getElementById("editModal").dataset.index;
+    if (index !== undefined) {
+        subscriptions[index].name = document.getElementById("editName").value;
+        subscriptions[index].amount = document.getElementById("editAmount").value;
+        subscriptions[index].phone = document.getElementById("editPhone").value;
+        
+        // حفظ التعديلات في localStorage
+        localStorage.setItem("subscriptions", JSON.stringify(subscriptions));
+        
+        // إعادة عرض البيانات وتحديث الجدول
+        renderSubscriptions();
+        
+        // إغلاق نافذة التعديل
+        closeEditModal();
+    }
+}
+
+
+
+
+
+
 
 function closeEditModal() {
     document.getElementById("editModal").classList.add("hidden");
