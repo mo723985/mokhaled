@@ -64,28 +64,27 @@ function openEditModal(index) {
 }
 
 function renderSubscriptions() {
-    const tableBody = document.getElementById("subscriptions");
-    tableBody.innerHTML = "";
+    let tbody = document.getElementById("subscriptions");
+    tbody.innerHTML = ""; // تفريغ الجدول قبل إعادة ملء البيانات
 
-    subscriptions.forEach((subscription, index) => {
-        const row = document.createElement("tr");
-        row.innerHTML = `
-            <td>${subscription.name}</td>
-            <td>${subscription.amount}</td>
-             <td><a href="tel:${subscription.phone}">${subscription.phone}</a></td>
-            <td onclick="togglePayment(${index}, 4)">${subscription.paymentStatus[4] ? "✅" : "❌"}</td>
-            <td onclick="togglePayment(${index}, 5)">${subscription.paymentStatus[5] ? "✅" : "❌"}</td>
-            <td onclick="togglePayment(${index}, 6)">${subscription.paymentStatus[6] ? "✅" : "❌"}</td>
-            <td onclick="togglePayment(${index}, 7)">${subscription.paymentStatus[7] ? "✅" : "❌"}</td>
-            <td onclick="togglePayment(${index}, 8)">${subscription.paymentStatus[8] ? "✅" : "❌"}</td>
-            <td onclick="togglePayment(${index}, 9)">${subscription.paymentStatus[9] ? "✅" : "❌"}</td>
-            <td onclick="togglePayment(${index}, 10)">${subscription.paymentStatus[10] ? "✅" : "❌"}</td>
-            <td onclick="togglePayment(${index}, 11)">${subscription.paymentStatus[11] ? "✅" : "❌"}</td>
-            <td onclick="togglePayment(${index}, 12)">${subscription.paymentStatus[12] ? "✅" : "❌"}</td>
-            <td><button onclick="editSubscription(${index})">تعديل</button></td>
+    subscriptions.forEach((sub, index) => {
+        let row = `<tr>
+            <td>${sub.name}</td>
+            <td>${sub.amount}</td>
+             <td><a href="tel:${sub.phone}">${sub.phone}</a></td>
+            <td onclick="togglePayment(${index}, 4)">${sub.paymentStatus[4] ? "✅" : "❌"}</td>
+            <td onclick="togglePayment(${index}, 5)">${sub.paymentStatus[5] ? "✅" : "❌"}</td>
+            <td onclick="togglePayment(${index}, 6)">${sub.paymentStatus[6] ? "✅" : "❌"}</td>
+            <td onclick="togglePayment(${index}, 7)">${sub.paymentStatus[7] ? "✅" : "❌"}</td>
+            <td onclick="togglePayment(${index}, 8)">${sub.paymentStatus[8] ? "✅" : "❌"}</td>
+            <td onclick="togglePayment(${index}, 9)">${sub.paymentStatus[9] ? "✅" : "❌"}</td>
+            <td onclick="togglePayment(${index}, 10)">${sub.paymentStatus[10] ? "✅" : "❌"}</td>
+            <td onclick="togglePayment(${index}, 11)">${sub.paymentStatus[11] ? "✅" : "❌"}</td>
+            <td onclick="togglePayment(${index}, 12)">${sub.paymentStatus[12] ? "✅" : "❌"}</td>
+            <td><button onclick="openEditModal(${index})">تعديل</button></td>
             <td><button onclick="deleteSubscription(${index})">حذف</button></td>
-        `;
-        tableBody.appendChild(row);
+        </tr>`;
+        tbody.innerHTML += row;
     });
 }
 
