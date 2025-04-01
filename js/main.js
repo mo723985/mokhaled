@@ -52,6 +52,16 @@ let subscriptions = JSON.parse(localStorage.getItem("subscriptions")) || [
    
 
 ];
+function openEditModal(index) {
+    let subscription = subscriptions[index]; 
+    document.getElementById("editName").value = subscription.name;
+    document.getElementById("editAmount").value = subscription.amount;
+    document.getElementById("editPhone").value = subscription.phone;
+    
+    // حفظ الفهرس في المتغير
+    document.getElementById("editModal").dataset.index = index;  
+    document.getElementById("editModal").classList.remove("hidden");
+}
 
 function renderSubscriptions() {
     const tableBody = document.getElementById("subscriptions");
